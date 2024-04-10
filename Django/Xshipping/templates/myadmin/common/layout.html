@@ -1,0 +1,172 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Xshipping/admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'myadmin/img/favicon.ico' %}">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/bootstrap.min.css' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/font-awesome.min.css' %}">
+    <!-- adminpro icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/adminpro-custon-icon.css' %}">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/meanmenu.min.css' %}">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/jquery.mCustomScrollbar.min.css' %}">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/animate.css' %}">
+    <!-- data-table CSS
+        ============================================ -->
+
+    <link rel="stylesheet" href="{% static 'myadmin/css/jvectormap/jquery-jvectormap-2.0.3.css' %}">
+
+    <!-- data-table CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/data-table/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'myadmin/css/data-table/bootstrap-editable.css' %}">
+    <!-- normalize CSS
+        =======================================-->
+    <link rel="stylesheet" href="{% static 'myadmin/css/normalize.css' %}">
+    <!-- charts C3 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/c3.min.css' %}">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'myadmin/css/form/all-type-forms.css' %}">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/style.css' %}">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'myadmin/css/responsive.css' %}">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+</head>
+
+<body class="materialdesign">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <!-- Header top area start-->
+    <div class="wrapper-pro">
+
+        {% include 'myadmin/common/slidebar.html' %}
+        {% include 'myadmin/common/header.html' %}
+        <div class="content-inner-all">
+            {% block content %}
+                
+            
+            
+            {% endblock %}
+        </div>
+    </div>
+    <!-- Footer Start-->        
+    
+    {% include 'myadmin/common/footer.html' %}
+
+    <!-- Footer End-->
+    <!-- Chat Box Start-->
+    
+    <!-- {% include 'myadmin/common/chatbox.html' %} -->
+
+    <!-- Chat Box End-->
+    <!-- jquery
+        ============================================ -->
+    <script src="{% static 'myadmin/js/vendor/jquery-1.11.3.min.js' %}"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/bootstrap.min.js' %}"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/jquery.meanmenu.js' %}"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/jquery.sticky.js' %}"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/jquery.scrollUp.min.js' %}"></script>
+     <!-- scrollUp JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/wow/wow.min.js' %}"></script>
+    <!-- counterup JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/counterup/waypoints.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/counterup/counterup-active.js' %}"></script>
+    <!-- peity JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/peity/peity-active.js' %}"></script>
+     <!-- jvectormap JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/jvectormap/jquery-jvectormap-2.0.2.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <script src="{% static 'myadmin/js/jvectormap/jvectormap-active.js' %}"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/sparkline/sparkline-active.js' %}"></script>
+    <!-- flot JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'myadmin/js/flot/jquery.flot.tooltip.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/flot/jquery.flot.spline.js' %}"></script>
+    <script src="{% static 'myadmin/js/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'myadmin/js/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'myadmin/js/flot/Chart.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/flot/flot-active.js' %}"></script>
+    <script src="{% static 'myadmin/js/flot/jquery.flot.symbol.js' %}"></script>
+    <script src="{% static 'myadmin/js/flot/jquery.flot.time.js' %} "></script>
+    <!-- map JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/map/raphael.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/map/jquery.mapael.js' %}"></script>
+    <script src="{% static 'myadmin/js/map/france_departments.js' %}"></script>
+    <script src="{% static 'myadmin/js/map/world_countries.js' %}"></script>
+    <script src="{% static 'myadmin/js/map/usa_states.js' %}"></script>
+    <script src="{% static 'myadmin/js/map/map-active.js' %}"></script>
+    <!-- data table JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'myadmin/js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'myadmin/js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'myadmin/js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'myadmin/js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'myadmin/js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'myadmin/js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'myadmin/js/data-table/bootstrap-table-export.js' %} "></script>
+
+    <!-- form validate JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/jquery.form.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/form-active.js' %}"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="{% static 'myadmin/js/main.js' %} "></script>
+</body>
+
+</html>

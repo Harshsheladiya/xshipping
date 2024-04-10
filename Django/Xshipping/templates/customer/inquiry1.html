@@ -1,0 +1,172 @@
+{% extends 'customer/common/layout.html' %}
+{% block content %}
+{% load static %}
+ <!-- page-title -->
+        <div class="cmt-page-title-row">
+            <div class="cmt-page-title-row-inner">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12">
+                            <div class="page-title-heading">
+                                <h2 class="title">Inquiry </h2>
+                            </div>
+                            <div class="breadcrumb-wrapper">
+                                <span>
+                                    <a title="Homepage" href="index.html">Home</a>
+                                </span>
+                                <span>Inquiry</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    
+        </div><!-- page-title end-->
+
+
+    <!--site-main start-->
+    <div class="site-main">
+
+
+        <section class="cmt-row clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="ttm_single_image-wrapper">
+                            <img class="img-fluid" src="{% static 'customer/images/single-img-ten.jpg' %}" alt="image">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cmt-bg cmt-col-bgcolor-yes cmt-bgcolor-grey spacing-12 z-index-2">
+                            <div class="cmt-col-wrapper-bg-layer cmt-bg-layer">
+                                <div class="cmt-col-wrapper-bg-layer-inner"></div>
+                            </div>
+                            <div class="layer-content">
+                                <div class="mb-30">
+                                    <h3 class="mb-5">Call Us Or Fill The Form For Inquiry</h3>
+                                    <p></p>
+                                </div>
+                                <form method="post" action="/customer/storeinquiry/" class="contact__form cmt-contactform-1 wrap-form clearfix" >
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>
+                                                <span class="text-input"><input type="text" name="fname" value="" placeholder="Your Name" required="required"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>
+                                                <span class="text-input"><input type="email" name="email" value="" placeholder="Your Email" required="required"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>
+                                                <span class="text-input"><input type="tel" name="contact" value="" placeholder="Phone Number" required="required" maxlength="10"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>
+                                                <span class="text-input"><input type="text" name="subject" value="" placeholder="Subject" required="required" ></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <label>
+                                        <span class="text-input"><textarea name="message" rows="3" placeholder="Message" required="required"></textarea></span>
+                                    </label>
+                                    <div class="form-group">
+                                <div class="form-select">
+                                    <select name="company" id="company">
+                                        <option value="">---select company---</option>
+                                        {% for row in result %}
+                                            <option value="{{row.user.id}}">{{row.user.first_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                                </div>
+                            </div>
+                            
+                                    <button name="submit" class="submit cmt-btn cmt-btn-size-md cmt-btn-shape-square cmt-btn-style-fill cmt-btn-color-skincolor" type="submit">Send Inquiry</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <!--featured-icon-box-->
+                        <div class="featured-icon-box border icon-align-top-content style5">
+                            <div class="featured-content">
+                                <div class="featured-title">
+                                    <h5>Visit Our Place</h5>
+                                </div>
+                                
+                            </div>
+                            <div class="featured-content-inner cmt-bgcolor-grey">
+                                <div class="featured-icon">
+                                    <div class="cmt-icon cmt-icon_element-onlytxt cmt-icon_element-color-skincolor cmt-icon_element-size-md">
+                                        <i class="flaticon-box"></i>
+                                    </div>
+                                </div>
+                                <p class="mb-0">office 1: +(91) 63556 60188</p>
+                                  <p class="mb-0">  office 2: +(91) 95749 53844</p>
+                                <p>Email: <a href="mailto:info@example.com">Xclusiveshipping@yahoo.com</a></p>
+                                <a class="cmt-btn cmt-btn-size-md btn-inline cmt-btn-color-skincolor" href="#">LOCATION</a>
+                            </div>
+                        </div><!-- featured-icon-box end-->
+                    </div>
+                    <div class="col-md-4">
+                        <!--featured-icon-box-->
+                        <div class="featured-icon-box border icon-align-top-content style5">
+                            <div class="featured-content">
+                                <div class="featured-title">
+                                    <h5>Quick Contact</h5>
+                                </div>
+                                <div class="featured-desc">
+                                    <p>Get Quick Touch With Us</p>
+                                </div>
+                            </div>
+                            <div class="featured-content-inner cmt-bgcolor-grey">
+                                <div class="featured-icon">
+                                    <div class="cmt-icon cmt-icon_element-onlytxt cmt-icon_element-color-skincolor cmt-icon_element-size-md">
+                                        <i class="flaticon-call"></i>
+                                    </div>
+                                </div>
+                                <p>Xclusive Shipping PlotNo-2 , <br> S.G. Road, Ahmedabad</p>
+                                <a class="cmt-btn cmt-btn-size-md btn-inline cmt-btn-color-skincolor" href="#">GET CALL BACK</a>
+                            </div>
+                        </div><!-- featured-icon-box end-->
+                    </div>
+                    <div class="col-md-4">
+                        <!--featured-icon-box-->
+                        <div class="featured-icon-box border icon-align-top-content style5">
+                            <div class="featured-content">
+                                <div class="featured-title">
+                                    <h5>Visit Bitween</h5>
+                                </div>
+                                <div class="featured-desc">
+                                    <p>Business Hours For Only Office</p>
+                                </div>
+                            </div>
+                            <div class="featured-content-inner cmt-bgcolor-grey">
+                                <div class="featured-icon">
+                                    <div class="cmt-icon cmt-icon_element-onlytxt cmt-icon_element-color-skincolor cmt-icon_element-size-md">
+                                        <i class="flaticon-truck"></i>
+                                    </div>
+                                </div>
+                                <p>Mon - Satday: 9.00am to 6.00pm <br>Sunday: Holiday</p>
+                                <a class="cmt-btn cmt-btn-size-md btn-inline cmt-btn-color-skincolor" href="#">MAKE AN APPOINMENT</a>
+                            </div>
+                        </div><!-- featured-icon-box end-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--google_map-->
+        
+
+
+    </div><!--site-main end-->
+
+   {% endblock %}

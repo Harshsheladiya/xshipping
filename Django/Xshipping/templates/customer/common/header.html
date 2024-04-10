@@ -1,0 +1,168 @@
+{% load static %}
+<!--header start-->
+        <header id="masthead" class="header cmt-header-style-01">
+            <!-- top_bar -->
+            <div class="top_bar cmt-bgcolor-darkgrey cmt-textcolor-white clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 d-flex flex-row align-items-center">
+                            <a class="cmt-btn btn-inline cmt-btn-size-sm cmt-btn-color-white cmt-icon-btn-right" href="#"><i class="ti ti-arrow-right"></i></a>
+                            <div class="top_bar_contact_item">
+                                <div class="top_bar_icon"></div>You can contact_us on social media also 
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex flex-row align-items-center">
+                            <div class="top_bar_contact_item ml-auto">
+                                <div class="top_bar_icon"><i class="ti ti-email"></i></div><a>Xclusiveshipping@yahoo.com</a>
+                            </div>
+                            <div class="top_bar_contact_item">
+                                <div class="top_bar_icon"><i class="ti ti-mobile"></i></div>957-495-3844
+                            </div>
+                            <div class="top_bar_contact_item">
+                                <div class="top_bar_social">
+                                    <ul class="social-icons">
+                                        <li><a class="tooltip-bottom" target="_blank" href="#" data-tooltip="Facebook" tabindex="-1"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li><a class="tooltip-bottom" target="_blank" href="#" data-tooltip="Twitter" tabindex="-1"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li><a class="tooltip-bottom" target="_blank" href="#" data-tooltip="Flickr" tabindex="-1"><i class="fa fa-flickr"></i></a>
+                                        </li>
+                                        <li><a class="tooltip-bottom" target="_blank" href="#" data-tooltip="Linkedin" tabindex="-1"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- top_bar end-->
+            <!-- site-header-menu -->
+            <div id="site-header-menu" class="site-header-menu cmt-textcolor-dark">
+                <div class="site-header-menu-inner cmt-stickable-header">
+                    <div class="container">
+                        <div class="cmt-bg cmt-col-bgcolor-yes cmt-right-span cmt-bgcolor-white mb_60 res-1199-mb-0 z-index-2">
+                            <div class="cmt-col-wrapper-bg-layer cmt-bg-layer"></div>
+                            <div class="layer-content">
+                                <!--site-navigation -->
+                                <div class="site-navigation d-flex flex-row">
+                                    <div class="pl-5 cmt-bgcolor-skincolor mr-30 res-1199-pl-0 res-1199-mr-0"></div>
+                                    <!-- site-branding -->
+                                    <div class="site-branding mr-auto">
+                                        <a class="home-link" href="index.html" title="Xclusive shipping" rel="home">
+                                            <img id="logo-img" class="img-center" src="{% static 'customer/images/logo.jpg'%}" alt="logo-img">
+                                        </a>
+                                    </div><!-- site-branding end -->
+                                    <div class="btn-show-menu-mobile menubar menubar--squeeze">
+                                        <span class="menubar-box">
+                                            <span class="menubar-inner"></span>
+                                        </span>
+                                    </div>
+                                    <!-- menu -->
+                                    <nav class="main-menu menu-mobile" id="menu">
+                                        <ul class="menu">
+                                            <li class="mega-menu-item active">
+                                                <a href="/customer/index/" class="mega-menu-link">Home</a>
+                                                <!-- <ul class="mega-submenu">
+                                                    <li class="active"><a href="index.html">Sample Homepage 1</a></li>
+                                                    <li><a href="home-2.html">Sample Homepage 2</a></li>
+                                                    <li><a href="home-3.html">Sample Homepage 3</a></li>
+                                                    <li class="mega-menu-item">
+                                                        <a href="#" class="mega-menu-link">Header Styles</a>
+                                                        <ul class="mega-submenu">
+                                                            <li><a href="index.html">Header Style 01</a></li>
+                                                            <li><a target="_blank" href="header-style-02.html">Header Style 02</a></li>
+                                                            <li><a target="_blank" href="header-style-03.html">Header Style 03</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul> -->
+                                            </li>
+                                            <li class="mega-menu-item">
+                                                <a href="#" class="mega-menu-link">order</a>
+                                                <ul class="mega-submenu">
+                                                    <li><a href="/customer/add_order1">Add order</a></li>
+                                                    <li><a href="/customer/orderdetail">view orders</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="mega-menu-item megamenu-fw">
+                                                <a href="#" class="mega-menu-link">let's talk!</a>
+                                                <ul class="mega-submenu megamenu-content" role="menu">
+                                                    <li>
+                                                        <div class="row">
+                                                            <div class="col-menu col-md-4">
+                                                                <h6 class="title">Faq</h6>
+                                                                <div class="content">
+                                                                    <ul class="menu-col">
+                                                                        <li><a href="/customer/faq">Faq</a></li>
+                                                                        
+                                                                    </ul>
+                                                                </div>
+                                                            </div><!-- end col-3 -->
+                                                            <div class="col-menu col-md-4">
+                                                                <h6 class="title">feedback</h6>
+                                                                <div class="content">
+                                                                    <ul class="menu-col">
+                                                                        <li><a href="/customer/feedback1">add feedback</a></li>
+                                                                        <li><a href="/customer/viewfeedback">view feedback</a></li>
+                                                                        
+                                                                    </ul>
+                                                                </div>
+                                                            </div><!-- end col-3 -->
+                                                           
+                                                        </div><!-- end row -->
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- <li class="mega-menu-item">
+                                                <a href="#" class="mega-menu-link">Services</a>
+                                                <ul class="mega-submenu">
+                                                    <li><a href="transportation.html">Transportation</a>
+                                                    </li><li><a href="logistics.html">Logistics</a></li>
+                                                    <li><a href="maintenance-leasing.html">Maintenance Leasing</a></li>
+                                                    <li><a href="distribution-services.html">Distribution Services</a></li>
+                                                    <li><a href="towing-service.html">Towing Service</a></li>
+                                                    <li><a href="consulting-storage.html">Consulting Storage</a></li>
+                                                </ul>
+                                            </li> -->
+                                            <li class="mega-menu-item">
+                                                <a href="/customer/portfolio" class="mega-menu-link">portfolio</a>
+                                            </li>
+                                            <li class="mega-menu-item">
+                                                <a href="/customer/about_us" class="mega-menu-link">About_us</a>
+                                            </li>
+                                            <li class="mega-menu-item">
+                                                <a href="/customer/inquiry1" class="mega-menu-link">Contact_us</a>
+                                            </li>
+                                            <li class="mega-menu-item">
+                                                <a href="#" class="mega-menu-link">My profile!</a>
+                                                <ul class="mega-submenu">
+                                                    <li><a href="/customer/myprofile">my profile</a></li>
+                                                    <li><a href="/customer/logout">Logout</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <div class="header_extra d-flex flex-row align-items-center justify-content-end">
+                                        <div class="header_search">
+                                            <a href="#" class="btn-default search_btn"><i class="ti ti-search"></i></a>
+                                            <div class="header_search_content">
+                                                <form id="searchbox" method="get" action="#">
+                                                    <input class="search_query" type="text" id="search_query_top" name="s" placeholder="Enter Keyword" value="">
+                                                    <button type="submit" class="btn close-search"><i class="fa fa-search"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="header_cart">
+                                            <a href="#" class="button-cart">
+                                                <div class="cart_icon"><i class="ti ti-shopping-cart"></i></div>
+                                                <div class="cart_count">0</div>
+                                            </a>
+                                        </div> -->
+                                    </div>
+                                </div><!-- site-navigation end-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- site-header-menu end-->
+        </header><!--header end-->

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Xclusive shipping</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="{% static 'customer/login/style.css ' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="logo text-center">
+  <br><br><br><h1>Xclusive shipping</h1>
+</div>
+<div class="wrapper">
+  <div class="inner-warpper text-center">
+    <h2 class="title">Login</h2>
+    <form method="post" action="/customer/login_check/" id="formvalidate" >
+      {% csrf_token %}
+      <div class="input-group">
+        <label class="palceholder" for="username">User Name</label>
+        <input class="form-control" name="username" id="username" type="text" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+      <div class="input-group">
+        <label class="palceholder" for="Password">Password</label>
+        <input class="form-control" name="password" id="password" type="password" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <button type="submit" id="login">Login</button><br><br>
+      <button type="submit" id="clear" onclick="this.form.reset();">Clear</button>
+      <div class="clearfix supporter">
+        <div class="pull-left remember-me">
+          <input id="rememberMe" type="checkbox">
+          <label for="rememberMe">Remember Me</label>
+        </div>
+        <a class="forgot pull-right" href="#">Forgot Password?</a>
+      </div>
+    </form>
+  </div>
+  <div class="signup-wrapper text-center">
+    <a href="/customer/registration">Don't have an accout? <span class="text-primary">Create One</span></a>
+  </div>
+</div>
+
+<!-- you don't need that :)  -->
+<div class="direction">
+  Login here, to get best experiance of shipping with xclusive shipping.
+</div>
+<!-- partial -->
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js'></script>
+<script  src="{% static 'customer/login/script.js' %}"></script>
+
+</body>
+</html>

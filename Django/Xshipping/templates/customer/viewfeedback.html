@@ -1,0 +1,30 @@
+{% extends 'customer/common/layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>View Feedback</h2>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="feedback-list">
+                <!-- Loop through feedback data -->
+                {% for item in feedback_data %}
+                <div class="feedback-item">
+                    <div class="feedback-header">
+                        <h3>Feedback from {{ storefeedback.name }}</h3>
+                        <span class="feedback-date">Date: {{ storefeedback.date }}</span>
+                    </div>
+                    <div class="feedback-body">
+                        <p>{{ storefeedback.message }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- If no feedback available -->
+                {% if feedback_data|length == 0 %}
+                <p>No feedback available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

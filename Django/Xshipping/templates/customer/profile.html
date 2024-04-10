@@ -1,0 +1,40 @@
+{% extends 'customer/common/layout.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<div class="contact-clients-area mg-b-40">
+                <div class="container-fluid" align="center">
+                        <br>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="contact-client-single ct-client-b-mg-30 ct-client-b-mg-30-n shadow-reset">
+                               
+                                <div class="row">
+                                    
+                                    <div class="col-lg-12">
+                                        <div class="contact-client-img">
+                                            <hr style="height:2px;border-width:0;color:darkblue;background-color:darkblue">
+
+                                            <h3  style="color:darkblue;"> <strong>Name :</strong> {{result1.user.first_name}}</h3></p>
+                                            <h4  style="color:darkblue;"> <strong>Username : </strong> {{result1.user.username}}</h4></p>
+
+                                        </div>
+                                        <div class="contact-client-content">
+                                            
+                                             <p style="color:darkblue;"> <strong>Gender :</strong> {{result1.gender}}</p> 
+                                        </div>
+                                        <div class="contact-client-address">
+                                             <p style="color:darkblue;"> <strong>Email : </strong> {{result1.user.email}}</p>
+                                            <p style="color:darkblue;" class="address-client-ct"><strong>Address:</strong> {{result1.address}} , {{result1.city}}-{{result1.pincode}}, {{result1.state}}. </p>
+                                            <p style="color:darkblue;"><strong>Phone:</strong> {{result1.contact}}</p>
+                                        </div>
+                                        <hr style="height:2px;border-width:0;color:darkblue;background-color:darkblue">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                    </div>
+                </div>
+            </div>
+    {% endblock %}

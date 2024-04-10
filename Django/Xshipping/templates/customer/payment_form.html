@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+</head>
+<body>
+    <h1>Enter Payment Details</h1>
+    <form method="POST" action="{% url 'payment' %}">
+        {% csrf_token %}
+        <label for="amount">Amount (INR):</label>
+        <input type="number" name="amount" id="amount" required>
+        <br>
+        <label for="customer_name">Your Name:</label>
+        <input type="text" name="customer_name" id="customer_name" required>
+        <br>
+        <label for="customer_email">Your Email:</label>
+        <input type="email" name="customer_email" id="customer_email" required>
+        <br>
+        <label for="customer_contact">Your Contact Number:</label>
+        <input type="tel" name="customer_contact" id="customer_contact" required>
+        <br>
+        <button type="submit">Proceed to Pay</button>
+    </form>
+</body>
+</html>

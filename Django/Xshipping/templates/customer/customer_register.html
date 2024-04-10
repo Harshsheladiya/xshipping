@@ -1,0 +1,334 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.cymolthemes.com/html/movixo/distribution-services.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Jan 2021 23:40:35 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="keywords" content="HTML5 Template" />
+<meta name="description" content="Cargo, Transport & Logistics HTML Template" />
+<meta name="author" content="https://www.cymolthemes.com/" />
+<meta name="viewport" content=" width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Xclusive shipping</title>
+
+<link rel="stylesheet" href="{% static 'customer/registration/fonts/material-icon/css/material-design-iconic-font.min.css'%}">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+
+<!-- Main css -->
+<link rel="stylesheet" href="{% static 'customer/registration/css/style.css'%}">
+<!-- favicon icon -->
+<link rel="shortcut icon" href="{% static 'customer/images/favicon.png'%}" />
+
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/bootstrap.min.css'%}"/>
+
+<!-- animate -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/animate.css'%}"/>
+
+<!-- fontawesome -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/font-awesome.css'%}"/>
+
+<!-- themify -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/themify-icons.css'%}"/>
+
+<!-- flaticon -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/flaticon.css'%}"/>
+
+<!-- slick -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/slick.css'%}">
+
+<!-- prettyphoto -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/prettyPhoto.css'%}">
+
+<!-- shortcodes -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/shortcodes.css'%}"/>
+
+<!-- main -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/main.css'%}"/>
+
+<!-- main -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/megamenu.css'%}"/>
+
+<!-- responsive -->
+<link rel="stylesheet" type="text/css" href="{% static 'customer/css/responsive.css'%}"/>
+
+
+</head>
+
+
+<body>
+    <!--page start-->
+    <div class="site-main">
+        <div class="cmt-row sidebar cmt-sidebar-right cmt-bgcolor-grey clearfix">
+            <div class="container">
+                <div class="row" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="main">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-img">
+                    <img src="{% static 'customer/registration/images/signup-img.jpg' %}" alt="">
+                </div>
+                <div class="signup-form">
+                    <form method="POST" class="register-form" id="register-form" method="post" action="/customer/store/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h3>registration form</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Username :</label>
+                                <input type="text" name="username" id="username" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="fname">Full Name :</label>
+                                <input type="text" name="fname" id="fname" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email ID :</label>
+                            <input type="email" name="email" id="email" />
+                        </div>
+                        <div class="form-group">
+                        <label for="contact">Phone Number: </label>
+                        <input required type="text" name="contact" id="contact" class="form-control phone" maxlength="10" onkeyup="validatephone(this);"/> 
+                        </div>
+                        <div class="form-radio">
+                            <label for="gender" class="radio-label">Gender :</label>
+                            <div class="form-radio-item">
+                                <input type="radio" name="gender" id="male" value="male">
+                                <label for="male">Male</label>
+                                <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                                <input type="radio" name="gender" id="female" value="female">
+                                <label for="female">Female</label>
+                                <span class="check"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address :</label>
+                            <input type="text" name="address" id="address" required/>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-group">
+                            <label for="pincode">Pincode :</label>
+                            <input type="text" name="pincode" id="pincode" maxlength="6">
+                        </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="state">State :</label>
+                                <div class="form-select">
+                                    <select name="state" id="state">
+                                        <option value="">--select state--</option>
+                                        <option value="Gujrat">Gujrat</option>
+                                        
+                                    </select>
+                                    <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City :</label>
+                                <div class="form-select">
+                                    <select name="city" id="city">
+                                        <option value="">---select city---</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Rajkot">Rajkot</option>
+                                        <option value="Surat">Surat</option>
+                                        <option value="Vadodara">Vadodara</option>
+                                        <option value="Bhavnagar">Bhavnagar</option>
+                                        <option value="Jamnagar">Jamnagar</option>
+                                        <option value="Junagadh">Junagadh</option>
+                                        <option value="Gandhinagar">Gandhinagar</option>
+                                        <option value="Gandhidham">Gandhidham</option>
+                                        <option value="Anand">Anand</option>
+                                        <option value="Navsari">Navsari</option>
+                                        <option value="Morbi">Morbi</option>
+                                        <option value="Nadiad">Nadiad</option>
+                                        <option value="Surendranagar">Surendranagar</option>
+                                        <option value="Bharuch">Bharuch</option>
+                                        <option value="Mehsana">Mehsana</option>
+                                        <option value="Bhuj">Bhuj</option>
+                                        <option value="Porbandar">PorbandarPalanpur</option>
+                                        <option value="Palanpur">Palanpur</option>
+                                        <option value="Valsad">Valsad</option>
+                                        <option value="Vapi">Vapi</option>
+                                        <option value="Gondal">Gondal</option>
+                                        <option value="Veraval">Veraval</option>
+                                        <option value="Godhra">Godhra</option>
+                                        <option value="Patan">Patan</option>
+                                        <option value="Kalol">Kalol</option>
+                                        <option value="Dahod">Dahod</option>
+                                        <option value="Botad">Botad</option>
+                                        <option value="Amreli">Amreli</option>
+                                        <option value="Deesa">Deesa</option>
+                                        <option value="Jetpur">Jetpur</option>
+                                    </select>
+                                    <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password: </label>
+                                <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16"  id="password" /> </p>
+                                <label for="password">Password Confirm: </label>
+                                <input required name="cpassword" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter again to validate"  id="cpassword" onkeyup="checkPass(); return false;" />
+                                <span id="confirmMessage" class="confirmMessage"></span>
+                                {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-submit">
+                            <input type="reset" value="Reset All" class="submit" name="reset" id="reset" onclick="this.form.reset();" />
+                            <input type="submit" value="Submit Form" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-30">
+                    <img src="{% static 'customer/registration/images/xship.jpg' %}" alt="" width="100%">
+                </div>
+                <!-- row start-->
+                <div class="row">
+                    <div class="col-lg-4 widget-area sidebar-right">
+                        <aside class="widget widget-nav-menu">
+                            <ul class="widget-menu">
+                                <li><a href="#">All-In-One Dashboard</a></li>
+                                <li><a href="#">Shipping Rate Calculator</a></li>
+                                <li><a href="#">Lowest Shipping Rates</a></li>
+                                <li><a href="#">Fastest delivery service</a></li>
+                                <li><a href="#">Multiple courier companies</a></li>
+                                <li><a href="#">29+ Serviceable Pin Codes</a></li>
+                            </ul>
+                        </aside>
+                        
+                        <aside class="widget widget_media_image p-0">
+                            <a href="#"><img class="img-fluid" src="{% static 'customer/images/banner-image.png' %}" alt="widget-banner"></a>
+                        </aside>
+                    </div>
+                    <div class="col-lg-8 content-area">
+                        <div class="cmt-service-single-content-area">
+                            <div class="cmt-featured-wrapper mb-40 res-991-mb-20">
+                                <img class="img-fluid" src="{% static 'customer/images/blog/blog-one-780x520.jpg' %}" alt="">
+                            </div>
+                            <div class="cmt-service-description">
+                                <h4>Shipping Through Land</h4>
+                                <div class="mb-30">
+                                    <p>Land shipping is one of the oldest forms of transporting goods. This is the most useful when it comes to delivering goods within a country or across neighboring borders. Trucks are typically used to transport goods via roads, as they have huge spaces to ship bulkier items such as construction material and even vehicles. </p>
+                                </div>
+                                <p>This mode of shipping is comparatively cheaper than the others. However, it might take longer for the goods to reach the final destination. </p>
+                               
+                            </div>
+                            <div class="row align-items-center mt-25 mb-25">
+                                <div class="col-sm-5">
+                                    <div class="ttm_single_image-wrapper">
+                                        <img class="img-fluid" src="{% static 'customer/images/single-img-eight.jpg' %}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <ul class="cmt-list cmt-list-style-icon res-767-mt-30">
+                                        <li><i class="ti ti-minus"></i>
+                                            <div class="cmt-list-li-content">Shipping by road  involves short-distance delivery like hyperlocal or intra-city deliveries. These are done via bicycles, motorbikes, or even cars.</div>
+                                        </li>
+                                        <li><i class="ti ti-minus"></i>
+                                            <div class="cmt-list-li-content">Shipping to land is more suitable for products that are heavy. You can ship items like refrigerators, televisions, ACs, etc.using this mode of transport. </div>
+                                        </li>
+                                       
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <h4>Something About Xclusive shipping </h4>
+                            <p>how it works ? 
+                               how we encourage you to use xclusive shipping ?
+                               what are the benefits of xclusive shipping? </p>
+                            <div class="accordion clearfix">
+                                <!-- toggle -->
+                                <div class="toggle cmt-style-classic cmt-bgcolor-white cmt-control-right-true">
+                                    <div class="toggle-title"><a href="#">How xshipping Works?</a></div>
+                                    <div class="toggle-content">
+                                        <div>1. Choose your shipment
+                                                Import all your orders with automated channel sync and select the shipment
+                                              2. Select courier partner
+                                                Based on your requirement select a courier partner
+                                              3. Pack and ship
+                                                 Pack your orders, print labels and hand it over to the courier partner
+                                              4. information
+                                                keep your customers informed via SMS and email notifications
+
+                                        </div>
+                                    </div>
+                                </div><!-- toggle end -->
+                                
+                                <!-- toggle -->
+                                <div class="toggle cmt-style-classic cmt-bgcolor-white cmt-control-right-true">
+                                    <div class="toggle-title"><a href="#">How we improve our services ?</a></div>
+                                    <div class="toggle-content">
+                                        <div>By getting feedback from Customers and by knowing their expriance as a user we improve our services.</div>
+                                    </div>
+                                </div><!-- toggle end -->
+                                <!-- toggle -->
+                                <div class="toggle cmt-style-classic cmt-bgcolor-white cmt-control-right-true">
+                                    <div class="toggle-title"><a href="#">Want to Become our courier Partner?</a></div>
+                                    <div class="toggle-content">
+                                        <div>If you want to become our courier partner then contact us!</div>
+                                    </div>
+                                </div><!-- toggle end -->
+                            </div>
+                             
+                            
+                        </div>
+                    </div>
+                </div><!-- row end -->
+            </div>
+        </div>
+
+      
+    </div><!--site-main end-->
+   
+
+
+    <!--back-to-top start-->
+    <a id="totop" href="#top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    <!--back-to-top end-->
+
+
+</div><!-- page end -->
+
+
+    <!-- Javascript -->
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="{% static 'customer/registration/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'customer/registration/js/main.js'%}"></script>
+    <script src="{% static 'customer/js/jquery.min.js'%}"></script>
+    <script src="{% static 'customer/js/tether.min.js'%}"></script>
+    <script src="{% static 'customer/js/bootstrap.min.js'%}"></script> 
+    <script src="{% static 'customer/js/jquery.easing.js'%}"></script>    
+    <script src="{% static 'customer/js/jquery-waypoints.js'%}"></script>    
+    <script src="{% static 'customer/js/jquery-validate.js'%}"></script> 
+    <script src="{% static 'customer/js/jquery.prettyPhoto.js'%}"></script>
+    <script src="{% static 'customer/js/slick.min.js'%}"></script>
+    <script src="{% static 'customer/js/numinate.min.js'%}"></script>
+    <script src="{% static 'customer/js/imagesloaded.min.js'%}"></script>
+    <script src="{% static 'customer/js/jquery-isotope.js'%}"></script>
+    <!-- <script src="{% static 'customer/js/main.js'%}"></script> -->
+
+    <!-- Javascript end-->
+
+</body>
+
+<!-- Mirrored from www.cymolthemes.com/html/movixo/distribution-services.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Jan 2021 23:40:35 GMT -->
+</html>

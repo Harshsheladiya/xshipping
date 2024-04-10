@@ -1,0 +1,260 @@
+{% extends 'customer/common/layout.html' %}
+
+{% block content %}
+<div class="wrapper-pro">
+        
+         <div class="content-inner-all">   
+            <div class="basic-form-area mg-b-15">
+                <div class="container-fluid">
+                   
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sparkline12-list shadow-reset mg-t-30">
+                                <div class="sparkline12-hd">
+                                    <div class="main-sparkline12-hd">
+                                        <h1>Custom Order</h1>
+                                        <h3><center>1.Sender details</center></h3>
+                                        
+                                    </div>
+                                </div>
+                            <hr style="height:2px;border-width:0;color:darkblue;background-color:darkblue">
+                             <h4><center>Sender details</center></h4>
+
+</br> 
+                                <form method="post" action="/customer/Senderorder/" >
+                             {% csrf_token %}
+                              <div class="sparkline12-graph">
+                                    <div class="basic-login-form-ad">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="all-form-element-inner">
+                                                 
+                                                       
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">SenderName</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <input type="text" class="form-control" name="Sender_name" placeholder="SenderName" required />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       <br>
+                                                        
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Sender Email ID</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <input type="email" class="form-control" name="Sender_email" placeholder="Email ID" required/>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Sender Number</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <input type="tel" class="form-control" name="Sender_phone_number" placeholder="Phone number" maxlength="10" required/>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Alternate Phone number</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <input type="tel" class="form-control"  name="Sender_alternate_phone_number" placeholder="Phone number"  maxlength="10" required/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <hr style="height:2px;border-width:0;color:darkblue;background-color:darkblue">
+                                                        
+                                                        <h4><center>Sender Address</center></h4>
+                                                        <br>
+                                                         <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Address Line1</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <input type="text-area" class="form-control"name="Pickup_address_line1" placeholder="Address Line1" required />
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Address Line2</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <input type="text-area" class="form-control" name="Pickup_address_line2" placeholder="Address Line2" required/>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Pincode</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <input type="tel" class="form-control" name="Sender_pincode" placeholder="Pincode" maxlength="6"required />
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+                                                         <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Select city</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="form-select-list">
+                                                                        <select class="form-control custom-select-value" name="Sender_city">
+                                                                            <option value="">---select city---</option>
+                                                                            <option>Ahmedabad</option>
+                                                                            <option>Surat</option>
+                                                                            <option>Kutch</option>
+                                                                            <option>Baroda</option>
+                                                                            <option>Rajkot</option>
+                                                                            <option>Vadodara</option>
+                                                                            <option>Bhavnagar</option>
+                                                                            <option>Jamnagar</option>
+                                                                            <option>Junagadh</option>
+                                                                            <option>Gandhinagar</option>
+                                                                            <option>Gandhidham</option>
+                                                                            <option>Anand</option>
+                                                                            <option>Navsari</option>
+                                                                            <option>Morbi</option>
+                                                                            <option>Nadiad</option>
+                                                                            <option>Surendranagar</option>
+                                                                            <option>Bharuch</option>
+                                                                            <option>Mehsana</option>
+                                                                            <option>Bhuj</option>
+                                                                            <option>PorbandarPalanpur</option>
+                                                                            <option>Palanpur</option>
+                                                                            <option>Valsad</option>
+                                                                            <option>Vapi</option>
+                                                                            <option>Gondal</option>
+                                                                            <option>Veraval</option>
+                                                                            <option>Godhra</option>
+                                                                            <option>Patan</option>
+                                                                            <option>Kalol</option>
+                                                                            <option>Dahod</option>
+                                                                            <option>Botad</option>
+                                                                            <option>Amreli</option>
+                                                                            <option>Deesa</option>
+                                                                            <option>Jetpur</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+                                                         <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Select State</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="form-select-list">
+                                                                        <select class="form-control custom-select-value" name="Sender_state">
+                                                                            <option>Gujarat</option>
+                                                                           
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+                                                         <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <label class="login2 pull-right pull-right-pro">Select Country</label>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="form-select-list">
+                                                                        <select class="form-control custom-select-value" name="Sender_country">
+                                                                            <option>India</option>
+                                                                            
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> <br>
+                                                      
+
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                                                    <label class="login2 pull-right pull-right-pro">Custom Checkbox and Radios </label>
+                                                                </div>
+                                                                <div class="col-lg-9 col-md-6 col-sm-6 col-xs-12">
+                                                                    <div class="bt-df-checkbox pull-left">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="i-checks pull-left">
+                                                                                    <label>
+                                                                                        <input type="checkbox" value=""> <i></i> Select For Hyperlocal Shipment </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="i-checks pull-left">
+                                                                                    <label>
+                                                                                        <input type="checkbox" value="" checked=""> <i></i>Billing address same as delivery address</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                       
+                                                       <br>
+                                                       
+                                                        <div class="form-group-inner">
+                                                            <div class="login-btn-inner">
+                                                                <div class="row">
+                                                                    <div class="col-lg-3"></div>
+                                                                    <div class="col-lg-9">
+                                                                        <div class="login-horizontal cancel-a pull-left bootstrap">
+                                                                            <button class="btn btn-white" type="button" onclick="window.history.back()">Cancel</button>
+                                                                            <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Next</button>
+                                                                        </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Basic Form End-->
+
+        </div>
+    </div>
+    {% comment %} <script>
+        function goToNextPage() {
+            // You can add form validation here if needed
+            // Example: if (validateForm()) {
+            window.location.href = "add_order2";
+            // }
+        }
+    </script> {% endcomment %}
+
+{% endblock %}
+

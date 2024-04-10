@@ -1,0 +1,8 @@
+{
+    "liveServer.settings.CustomBrowser": "chrome",
+    "html.format.templating": true,
+    "python.analysis.inlayHints.functionReturnTypes": false,
+    "C_Cpp.default.browse.path": [],
+    "liveServer.settings.NoBrowser": false,
+    "terminal.integrated.tabs.defaultIcon": "browser"
+}

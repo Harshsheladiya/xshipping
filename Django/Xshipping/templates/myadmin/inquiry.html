@@ -1,0 +1,59 @@
+{% extends 'myadmin/common/layout.html' %}
+{% block content %}
+
+
+<div class="col-lg-12">
+                                    <div class="tab-content">
+                                        <div id="inbox" class="tab-pane fade in animated zoomInDown custom-inbox-message shadow-reset active">
+                                            <div>
+                                                <h2>Inquiry</h2>
+                                                <div class="view-mail-action view-mail-ov-d-n">
+                                                    
+                                                    <a class="compose-draft-bt" href="javascript:window.print()"><i class="fa fa-print"></i> Print</a>
+                                                    <a class="compose-discard-bt" href="#"><i class="fa fa-trash-o"></i> Trash</a>
+                                                </div>
+                                            </div>
+                                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                                <div id="toolbar1">
+                                                    <select class="form-control">
+                                                        <option value="">Export Basic</option>
+                                                        <option value="all">Export All</option>
+                                                        <option value="selected">Export Selected</option>
+                                                    </select>
+                                                </div>
+                                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar1">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="Inquiry" data-checkbox="true"></th>
+                                                            <th data-field="id">ID</th>
+                                                            <th data-field="name">Name</th>
+                                                            <th data-field="email">Email</th>
+                                                            <th data-field="phone">phone number</th>
+                                                            <th data-field="subject">Subject</th>
+                                                            <th data-field="message">Massage</th>
+                                                            <th data-field="company">company</th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for i in readf %}
+                                                        <tr class="new-email">
+                                                            <td></td>
+                                                            <td>{{i.primary_user_id}}</td>
+                                                            <td>{{i.name}}</td>
+                                                            <td>{{i.email}}</td>
+                                                            <td>{{i.contact}}</td>
+                                                            <td>{{i.subject}}</td>
+                                                            <td>{{i.message}}</td>
+                                                            <td>{{i.secondary_user_id}}</td>
+                                                        </tr>
+                                                        {% endfor %}                                                    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                     </div>
+
+</div>            
+{% endblock %}
+

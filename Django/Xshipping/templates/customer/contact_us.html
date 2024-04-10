@@ -1,0 +1,164 @@
+{% extends 'customer/common/layout.html' %}
+{% block content %}
+{% load static %}
+ <!-- page-title -->
+        <div class="cmt-page-title-row">
+            <div class="cmt-page-title-row-inner">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12">
+                            <div class="page-title-heading">
+                                <h2 class="title">Contact Us </h2>
+                            </div>
+                            <div class="breadcrumb-wrapper">
+                                <span>
+                                    <a title="Homepage" href="index.html">Home</a>
+                                </span>
+                                <span>Contact Us</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    
+        </div><!-- page-title end-->
+
+
+    <!--site-main start-->
+    <div class="site-main">
+
+
+        <section class="cmt-row clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="ttm_single_image-wrapper">
+                            <img class="img-fluid" src="{% static 'customer/images/single-img-ten.jpg' %}" alt="image">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cmt-bg cmt-col-bgcolor-yes cmt-bgcolor-grey spacing-12 z-index-2">
+                            <div class="cmt-col-wrapper-bg-layer cmt-bg-layer">
+                                <div class="cmt-col-wrapper-bg-layer-inner"></div>
+                            </div>
+                            <div class="layer-content">
+                                <div class="mb-30">
+                                    <h3 class="mb-5">Call Us Or Fill The Form</h3>
+                                    <p></p>
+                                </div>
+                                <form method="post" action="#" class="contact__form cmt-contactform-1 wrap-form clearfix" >
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>
+                                                <span class="text-input"><input name="name" type="text" value="" placeholder="Your Name" required="required"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>
+                                                <span class="text-input"><input name="email" type="text" value="" placeholder="Your Email" required="required"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>
+                                                <span class="text-input"><input name="phone" type="text" value="" placeholder="Phone Number" required="required"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>
+                                                <span class="text-input"><input name="subject" type="text" value="" placeholder="Subject" required="required"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <label>
+                                        <span class="text-input"><textarea name="message" rows="3" placeholder="Message" required="required"></textarea></span>
+                                    </label>
+                                    <button name="submit" class="submit cmt-btn cmt-btn-size-md cmt-btn-shape-square cmt-btn-style-fill cmt-btn-color-skincolor" type="submit">Send Message</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <!--featured-icon-box-->
+                        <div class="featured-icon-box border icon-align-top-content style5">
+                            <div class="featured-content">
+                                <div class="featured-title">
+                                    <h5>Visit Our Place</h5>
+                                </div>
+                                <div class="featured-desc">
+                                    <p>14 Branches Over The World</p>
+                                </div>
+                            </div>
+                            <div class="featured-content-inner cmt-bgcolor-grey">
+                                <div class="featured-icon">
+                                    <div class="cmt-icon cmt-icon_element-onlytxt cmt-icon_element-color-skincolor cmt-icon_element-size-md">
+                                        <i class="flaticon-box"></i>
+                                    </div>
+                                </div>
+                                <p class="mb-0">Phone: +324 123 45 978</p>
+                                <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+                                <a class="cmt-btn cmt-btn-size-md btn-inline cmt-btn-color-skincolor" href="#">LOCATE US ON MAP</a>
+                            </div>
+                        </div><!-- featured-icon-box end-->
+                    </div>
+                    <div class="col-md-4">
+                        <!--featured-icon-box-->
+                        <div class="featured-icon-box border icon-align-top-content style5">
+                            <div class="featured-content">
+                                <div class="featured-title">
+                                    <h5>Quick Contact</h5>
+                                </div>
+                                <div class="featured-desc">
+                                    <p>Get Quick Touch With Us</p>
+                                </div>
+                            </div>
+                            <div class="featured-content-inner cmt-bgcolor-grey">
+                                <div class="featured-icon">
+                                    <div class="cmt-icon cmt-icon_element-onlytxt cmt-icon_element-color-skincolor cmt-icon_element-size-md">
+                                        <i class="flaticon-call"></i>
+                                    </div>
+                                </div>
+                                <p>Flat A, 20/7, Reynolds Neck Str <br>Helenaville, FV77 8WS</p>
+                                <a class="cmt-btn cmt-btn-size-md btn-inline cmt-btn-color-skincolor" href="#">GET CALL BACK</a>
+                            </div>
+                        </div><!-- featured-icon-box end-->
+                    </div>
+                    <div class="col-md-4">
+                        <!--featured-icon-box-->
+                        <div class="featured-icon-box border icon-align-top-content style5">
+                            <div class="featured-content">
+                                <div class="featured-title">
+                                    <h5>Visit Bitween</h5>
+                                </div>
+                                <div class="featured-desc">
+                                    <p>Business Hours For Only Office</p>
+                                </div>
+                            </div>
+                            <div class="featured-content-inner cmt-bgcolor-grey">
+                                <div class="featured-icon">
+                                    <div class="cmt-icon cmt-icon_element-onlytxt cmt-icon_element-color-skincolor cmt-icon_element-size-md">
+                                        <i class="flaticon-truck"></i>
+                                    </div>
+                                </div>
+                                <p>Mon - Satday: 9.00am to 6.00pm <br>Sunday: Holiday</p>
+                                <a class="cmt-btn cmt-btn-size-md btn-inline cmt-btn-color-skincolor" href="#">MAKE AN APPOINMENT</a>
+                            </div>
+                        </div><!-- featured-icon-box end-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--google_map-->
+        <div id="google_map" class="google_map">
+            <div class="map_container">
+                <div id="map"></div>
+            </div>
+        </div>
+
+
+    </div><!--site-main end-->
+
+   {% endblock %}

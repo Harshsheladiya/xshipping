@@ -1,0 +1,187 @@
+{% extends 'myadmin/common/layout.html' %}
+{% load static %}
+{% block content %}
+            
+            <div class="login-form-area mg-t-30 mg-b-15">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <form id="adminpro-register-form" class="adminpro-form" method="post" action="/myadmin/store/" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="col-lg-6">
+                                <div class="login-bg">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="logo">
+                                                <a ="#"><img src="img/logo/log.png" alt="" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="login-title">
+                                                <h1>Company Registration Form</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>User name</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                     <input type="text" class="form-control" id="username" name="username" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>Company name</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                     <input type="text" class="form-control" id="fname" name="fname" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>Company image</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+                    
+                                                     <input type="file" id="myfile" name="myfile" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    <div class="row">
+                                        
+                                            <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>Owner name</p>
+                                            </div>
+                                        
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+                                                     <input type="text" class="form-control" id="owner_name" name="owner_name" value="{{readf.owner_name}}" />
+                                                    </div>
+                                                </div>href
+                                            </div>
+                                        </div>
+                                     <div class="row">
+                                        
+                                            <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>Contact number</p>
+                                            </div>
+                                        
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                     <input type="text" class="form-control" id="contact" name="contact" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>Email Address</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="login-input-area">
+                                                <input type="email" name="email" id="email" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        
+                                            <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>Company Address</p>
+                                            </div>
+                                        
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                     <textarea id="address" name="address" rows="5" cols="50" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>  
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>Password</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="login-input-area">
+                                                <input type="password" name="password" id="password" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="login-input-head">
+                                                <p>Confarm Password</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="login-input-area">
+                                                <input type="password" name="cpassword" id="cpassword" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-8">
+                                            <div class="login-keep-me register-check">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="remember" checked><i></i>Send a copy to my e-mail address
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-8">
+                                            <div class="login-button-pro">
+                                                <button type="submit" class="login-button login-button-rg" onclick="this.form.reset();">Cancel</button>
+                                                <button type="submit" class="login-button login-button-lg"  name="submit" value="submit
+                                                ">update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+            </div>
+            
+           
+            {% endblock %}
+        
