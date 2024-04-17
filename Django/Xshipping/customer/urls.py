@@ -30,7 +30,9 @@ urlpatterns = [
     path('add_order3', views.add_order3, name='add_order3'),
     path('Orderinfo/',views.Orderinfo, name='Orderinfo'),
     path('add_order4', views.add_order4, name='add_order4'),
+    path('order_summary/', views.order_summary, name='order_summary'),
     path('orderdetail', views.orderdetail, name='orderdetail'),
+    # path('select_company/', views.select_company, name='select_company'),
     path('myprofile', views.myprofile, name='myprofile'),
     path('faq', views.faq, name='faq'),
     path('portfolio', views.portfolio, name='portfolio'),
@@ -47,9 +49,9 @@ urlpatterns = [
 
 
 
-    path('payment', views.payment, name='payment'),
-    path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
-    path('admin/', admin.site.urls),
+    # path('payment', views.payment, name='payment'),
+    # path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
+    # path('admin/', admin.site.urls),
 ]
 
 

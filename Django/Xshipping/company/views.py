@@ -81,8 +81,10 @@ def store_price(request):
 	to_city 	= request.POST['tocity']
 	weight      = request.POST['weight']
 	price 		= request.POST['price']
+	company = company_reg.objects.get(user=request.user)
 
-	price_reg.objects.create(from_city=from_city,to_city=to_city,package_weight=weight,price=price,user_id=request.user.id)
+
+	price_reg.objects.create(from_city=from_city,to_city=to_city,package_weight=weight,price=price,user_id=request.user.id,company=company,)
 	return redirect('/company/add_price/')
 
 
@@ -159,3 +161,5 @@ def destroy(request):
 	readf.delete()
 	readg.delete()
 	return redirect('/company/login/')
+
+

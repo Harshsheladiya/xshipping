@@ -98,12 +98,12 @@ class OrderInfo(models.Model):
     date = models.DateField()
     order_type = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
-    quantity = models.PositiveIntegerField()
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    # quantity = models.PositiveIntegerField()
+    # unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     weight = models.DecimalField(max_digits=10, decimal_places=2,default=0.0)  
-    length = models.DecimalField(max_digits=10, decimal_places=2, default=0.0) 
-    width = models.DecimalField(max_digits=10, decimal_places=2,default=0.0)   
-    height = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)  # Default value added here
+    length = models.DecimalField(max_digits=10, decimal_places=2, default=0.0,null=True) 
+    width = models.DecimalField(max_digits=10, decimal_places=2,default=0.0,null=True)   
+    height = models.DecimalField(max_digits=10, decimal_places=2, default=0.0,null=True)  
     payment_method = models.CharField(max_length=100)
     total = models.DecimalField(max_digits=10, decimal_places=2)
 

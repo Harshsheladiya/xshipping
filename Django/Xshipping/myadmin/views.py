@@ -136,10 +136,14 @@ def store(request):
 
 #________________read companies_________________
 def read(request):
-    readf= company_reg.objects.all()
-    readg=User.objects.all()
-    context={'readf': readf,'readg':readg}
-    return render(request,'myadmin/logistic_companies.html',context)
+    readf = company_reg.objects.all()
+    # Fetch related data using reverse relation
+    readg = User.objects.all()
+    # Fetch related data from price_reg
+    readh = price_reg.objects.select_related('user').all()
+    context = {'readf': readf, 'readg': readg, 'readh': readh}
+    return render(request, 'myadmin/logistic_companies.html', context)
+
 
 
 

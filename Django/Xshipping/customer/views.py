@@ -3,15 +3,18 @@ from django.contrib.auth.models import User
 from customer.models import profile,OrderInfo
 from customer.models import feedback,inquiry,ReceiverOrder,SenderOrder
 from myadmin.models import company_reg
+from company.models import price_reg
 from django.contrib import auth,messages
 from django.conf import settings
 import razorpay
 import os
 from django.contrib.auth.decorators import login_required
 from .models import SenderOrder, ReceiverOrder, OrderInfo
-
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseBadRequest
+from decimal import Decimal
+from itertools import zip_longest
+
 
 def layout(request):
 	return render(request,'customer/common/layout.html')
@@ -257,8 +260,8 @@ def Orderinfo(request):
         date = request.POST.get('date')
         order_type = request.POST.get('order_type')
         product_name = request.POST.get('product_name')
-        quantity = request.POST.get('quantity')
-        unit_price = request.POST.get('unit_price')
+        # quantity = request.POST.get('quantity')
+        # unit_price = request.POST.get('unit_price')
         weight = request.POST.get('weight')
         length = request.POST.get('length')
         width = request.POST.get('width')
@@ -271,8 +274,8 @@ def Orderinfo(request):
             date=date,
             order_type=order_type,
             product_name=product_name,
-            quantity=quantity,
-            unit_price=unit_price,
+            # quantity=quantity,
+            # unit_price=unit_price,
             weight=weight,
             length=length,
             width=width,
@@ -282,103 +285,82 @@ def Orderinfo(request):
             primary_user_id=request.user.id
         )
 
-        return redirect('success_page')  
+        return redirect('order_summary')  
     
-    return render(request, 'add_order3.html')
+    return render(request, 'customer/add_order3.html')
 
-     
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from .models import SenderOrder, ReceiverOrder, OrderInfo
+from django.db.models import Q
 
 @login_required
-def orderdetail(request):
-    sender_orders = SenderOrder.objects.filter(primary_user=request.user)
-    receiver_orders = ReceiverOrder.objects.filter(primary_user=request.user)
-    order_infos = OrderInfo.objects.filter(primary_user=request.user)
+def order_summary(request):
+    # Retrieve distinct sender and receiver information
+    sender_order = SenderOrder.objects.filter(primary_user=request.user).order_by('-id').first()
+    receiver_order = ReceiverOrder.objects.filter(primary_user=request.user).order_by('-id').first()
+
+    # Check if sender_order and receiver_order are None
+    if sender_order is None or receiver_order is None:
+        # Handle the case where sender_order or receiver_order is not found
+        return render(request, 'error_template.html', {'error_message': 'Sender order or receiver order not found'})
+
+    sender_city = sender_order.Sender_city 
+    receiver_city = receiver_order.Receiver_city 
+
+    # Retrieve distinct package weights from the price_reg model
+    package_weights_decimal = price_reg.objects.values_list('package_weight', flat=True).distinct()
+    # Convert Decimal objects to string for display
+    package_weights = [str(weight) for weight in package_weights_decimal]
+
+    # Retrieve the latest OrderInfo for the user
+    latest_order_info = OrderInfo.objects.filter(primary_user=request.user).order_by('-id').first()
+
+    # Mapping predefined weights to their corresponding ranges
+    weight_ranges = {
+        '0-20': '5-20kg',
+        '21-50': '21-50kg',
+        '51-100': '51-100kg',
+    }
+
+    # Get the weight range based on the weight
+    weight_display = None
+    if latest_order_info is not None:
+        weight = Decimal(str(latest_order_info.weight))  # Convert Decimal to string
+        for range_key, range_value in weight_ranges.items():
+            start, end = map(int, range_key.split('-'))
+            if start <= weight <= end:
+                weight_display = range_value
+                break
+        if weight_display is None:
+            weight_display = str(weight) + 'kg'  # If weight is not within predefined ranges, display the original weight
+
+    # Retrieve company information based on weight ranges
+    weight_company_map = {}
+    weight_company_mapp = {}
+
+    for weight_range in package_weights:
+        companiess = company_reg.objects.filter(price_reg__from_city=sender_city, price_reg__to_city=receiver_city, price_reg__package_weight=weight_range).distinct()
+        weight_company_mapp[weight_range] = companiess
+
+    # Ensure that companies_map and companiess are of the same length
+    for weight_range, companies in weight_company_mapp.items():
+        companies_map = price_reg.objects.filter(from_city=sender_city, to_city=receiver_city, package_weight=weight_range).distinct()
+        zipped_data = zip_longest(companies, companies_map)
+        weight_company_map[weight_range] = zipped_data
 
     context = {
-        'sender_orders': sender_orders,
-        'receiver_orders': receiver_orders,
-        'order_infos': order_infos,
-        'company_name': request.user.first_name  # Assuming you have company name in the user profile
+        'sender_order': sender_order,
+        'receiver_order': receiver_order,
+        'sender_city': sender_city,  # Add sender_city to context
+        'receiver_city': receiver_city,  # Add receiver_city to context
+        'latest_order_info': latest_order_info,
+        'package_weights': package_weights,
+        'weight_display': weight_display,
+        'weight_company_map': weight_company_map,
+        'weight_company_mapp': weight_company_mapp,
     }
-    return render(request, 'customer/orderdetail.html', context)
 
-
-
-
-
-razorpay_client = razorpay.Client(
-    auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
- 
- 
-def payment(request):
-    currency = 'INR'
-    amount = 20000  # Rs. 200
-
-    # Create a Razorpay Order
-    razorpay_order = razorpay_client.order.create(dict(amount=amount,
-                                                       currency=currency,
-                                                       payment_capture='0'))
-
-    # order id of newly created order.
-    razorpay_order_id = razorpay_order['id']
-    callback_url = 'paymenthandler/'
-
-    # we need to pass these details to frontend.
-    context = {}
-    context['razorpay_order_id'] = razorpay_order_id
-    context['razorpay_merchant_key'] = settings.RAZOR_KEY_ID
-    context['razorpay_amount'] = amount
-    context['currency'] = currency
-    context['callback_url'] = callback_url
-
-    return render(request, 'customer/payment.html', context=context)
-
- 
-# we need to csrf_exempt this url as
-# POST request will be made by Razorpay
-# and it won't have the csrf token.
-@csrf_exempt
-def paymenthandler(request):
- 
-    # only accept POST request.
-    if request.method == "POST":
-        try:
-           
-            # get the required parameters from post request.
-            payment_id = request.POST.get('razorpay_payment_id', '')
-            razorpay_order_id = request.POST.get('razorpay_order_id', '')
-            signature = request.POST.get('razorpay_signature', '')
-            params_dict = {
-                'razorpay_order_id': razorpay_order_id,
-                'razorpay_payment_id': payment_id,
-                'razorpay_signature': signature
-            }
- 
-            # verify the payment signature.
-            result = razorpay_client.utility.verify_payment_signature(
-                params_dict)
-            if result is not None:
-                amount = 20000  # Rs. 200
-                try:
- 
-                    # capture the payemt
-                    razorpay_client.payment.capture(payment_id, amount)
- 
-                    # render success page on successful caputre of payment
-                    return render(request, 'paymentsuccess.html')
-                except:
- 
-                    # if there is an error while capturing payment.
-                    return render(request, 'paymentfail.html')
-            else:
- 
-                # if signature verification fails.
-                return render(request, 'paymentfail.html')
-        except:
- 
-            # if we don't find the required parameters in POST data
-            return HttpResponseBadRequest()
-    else:
-       # if other than POST request is made.
-        return HttpResponseBadRequest()
+    return render(request, 'customer/order_summary.html', context)
