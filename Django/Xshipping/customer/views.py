@@ -129,32 +129,50 @@ def logout(request):
 	auth.logout(request)
 	return redirect('/customer/login/')
 
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
+from django.contrib import messages
+from .models import profile  # Assuming you have a Profile model defined
 
 def store(request):
-	#auth user
-	user_name   = request.POST['username']
-	fname 		= request.POST['fname']
-	email 		= request.POST['email']
-	password 	= request.POST['password']
-	cpassword 	= request.POST['cpassword']
-	contact 	= request.POST['contact']
-	gender 		= request.POST['gender']
-	address 	= request.POST['address']
-	pincode 	= request.POST['pincode']
-	state 		= request.POST['state']
-	city 		= request.POST['city']
-	
-	
+    if request.method == 'POST':
+        user_name = request.POST.get('username')
+        fname = request.POST.get('fname')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+        contact = request.POST.get('contact')
+        gender = request.POST.get('gender')
+        address = request.POST.get('address')
+        pincode = request.POST.get('pincode')
+        state = request.POST.get('state')
+        city = request.POST.get('city')
 
+        if not (user_name and fname and email and password and cpassword and contact and gender and address and pincode and state and city):
+            # Handle case where required fields are missing
+            messages.error(request, 'All fields are required.')
+            return redirect('/customer/registration/')
+        
+        if password == cpassword:
+            # Create user
+            user = User.objects.create_user(username=user_name, first_name=fname, email=email, password=password)
+            # Set additional user attributes
+            user.first_name = fname
+            user.phone = contact
+            user.save()
 
-	if password==cpassword:
-		user = User.objects.create_user(username=user_name,first_name=fname,email=email,password=password)
+            # Create profile
+            profile = Profile.objects.create(contact=contact, gender=gender, address=address, pincode=pincode, state=state, city=city, user_id=user.id)
 
-		profile.objects.create(contact=contact,gender=gender,address=address,pincode=pincode,state=state,city=city,user_id=user.id)
-		return redirect('/customer/login/')
-	else:
-		messages.error(request,'password and confirm password is mismatched')
-		return redirect('/customer/registration/')
+            # Redirect to login page
+            return redirect('/customer/login/')
+        else:
+            messages.error(request, 'Password and confirm password do not match.')
+            return redirect('/customer/registration/')
+    else:
+        # Handle case where request method is not POST
+        messages.error(request, 'Invalid request method.')
+        return redirect('/customer/registration/')
 
 
 		
@@ -267,7 +285,7 @@ def Orderinfo(request):
         width = request.POST.get('width')
         height = request.POST.get('height')
         payment_method = request.POST.get('payment_method')
-        total = request.POST.get('total')
+        # total = request.POST.get('total')
         
         # Create and save the Order object
         Orderinfo = OrderInfo.objects.create(
@@ -281,10 +299,10 @@ def Orderinfo(request):
             width=width,
             height=height,
             payment_method=payment_method,
-            total=total,
+            # total=total,
             primary_user_id=request.user.id
         )
-
+    
         return redirect('order_summary')  
     
     return render(request, 'customer/add_order3.html')
@@ -364,3 +382,57 @@ def order_summary(request):
     }
 
     return render(request, 'customer/order_summary.html', context)
+
+
+
+@login_required
+def orderdetail(request):
+    sender_orders = SenderOrder.objects.filter(primary_user=request.user)
+    receiver_orders = ReceiverOrder.objects.filter(primary_user=request.user)
+    order_infos = OrderInfo.objects.filter(primary_user=request.user)
+
+    context = {
+        'sender_orders': sender_orders,
+        'receiver_orders': receiver_orders,
+        'order_infos': order_infos,
+        'company_name': request.user.first_name  # Assuming you have company name in the user profile
+    }
+    return render(request, 'customer/orderdetail.html', context)
+
+
+
+
+
+import razorpay
+from django.conf import settings
+from django.http import JsonResponse
+import time 
+from razorpay import Client
+
+def process_payment(request):
+    if request.method == 'POST':
+        total_amount = request.POST.get('total')
+        total_amount_in_paisa = int(float(total_amount)*100 )
+        
+        client = Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+        payment_data = {
+            'amount': total_amount_in_paisa,
+            'currency': 'INR',
+            'receipt': 'order_receipt_' + str(int(time.time())),  # Unique order receipt
+        }
+        payment = client.order.create(data=payment_data)
+        
+        context = {
+            'razorpay_key_id': settings.RAZORPAY_KEY_ID,
+            'amount': total_amount_in_paisa,
+            'order_id': payment['id'],
+            'user_name': request.user.first_name,  # Replace with your user's name field
+            'user_email': request.user.email,  # Replace with your user's email field
+            # 'user_phone': request.user.Contact,  # Replace with your user's phone field
+            # 'user_address': request.user.address,  # Replace with your user's address field
+        }
+        return render(request, 'customer/payment.html', context)
+
+
+def payment_success(request):
+    return render(request, 'customer/payment_success.html')

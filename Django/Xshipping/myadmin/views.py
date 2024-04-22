@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from myadmin.models import company_reg
 from company.models import price_reg
-from customer.models import inquiry,feedback,profile
+from customer.models import inquiry,feedback,profile,SenderOrder,ReceiverOrder,OrderInfo
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 import os
@@ -41,9 +41,42 @@ def logout(request):
 # 	context={}
 # 	return render(request,'myadmin/dashboard.html',context)
 
+# def order_list(request):
+# 	context={}
+# 	return render(request,'myadmin/order_list.html',context)
+
+
+
+
+# def order_list(request):
+#     orders = OrderInfo.objects.all()
+#     context = {'orders': orders}
+#     return render(request, 'myadmin/order_list.html', context)
+
 def order_list(request):
-	context={}
-	return render(request,'myadmin/order_list.html',context)
+    orders = OrderInfo.objects.all()
+    sender_orders = SenderOrder.objects.all()
+    receiver_orders = ReceiverOrder.objects.all()
+    context = {
+        'orders': orders,
+        'sender_orders': sender_orders,
+        'receiver_orders': receiver_orders,
+    }
+    return render(request, 'myadmin/order_list.html', context)
+
+
+def dashboard(request):
+    profiles = profile.objects.all()
+    companie = company_reg.objects.all()
+    orders = OrderInfo.objects.all()  # Retrieve all orders
+    
+    context = {
+        'profiles': profiles,
+        'companie': companie,
+        'orders': orders,  # Pass orders to the template
+    }
+
+    return render(request, 'myadmin/dashboard.html', context)
 
 def view_price(request):
 	context={}
@@ -148,13 +181,3 @@ def read(request):
 
 
 
-def dashboard(request):
-    profiles = profile.objects.all()  # Get all profiles
-    companie = company_reg.objects.all()  # Get all companies
-    
-    context = {
-        'profiles': profiles,
-        'companie': companie,
-    }
-    
-    return render(request, 'myadmin/dashboard.html', context)

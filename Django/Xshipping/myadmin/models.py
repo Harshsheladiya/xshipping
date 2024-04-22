@@ -10,3 +10,4 @@ class company_reg(models.Model):
 
 	class Meta:
 		db_table='companies'
+

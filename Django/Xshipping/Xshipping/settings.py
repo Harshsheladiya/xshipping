@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'myadmin',
     'company',
     'customer',
+    
 ]
 
 MIDDLEWARE = [
@@ -144,5 +145,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-RAZOR_KEY_ID = 'rzp_test_RoHrxppxWkYTy6'
-RAZOR_KEY_SECRET = 'TO972wcqyLjsHP8LQVeDJlkH'
+RAZORPAY_KEY_ID = 'rzp_test_RoHrxppxWkYTy6'
+RAZORPAY_KEY_SECRET = 'TO972wcqyLjsHP8LQVeDJlkH'

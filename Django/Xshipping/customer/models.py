@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from myadmin.models import company_reg
-from django.db import models
+
 
 class profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE,default="")
@@ -90,24 +90,38 @@ class ReceiverOrder(models.Model):
         db_table = 'Receiverorder'
 
 
+# class CompanyOrder(models.Model):
+#     order_info = models.ForeignKey('OrderInfo', on_delete=models.CASCADE, related_name='company_orders')
+#     company_name = models.CharField(max_length=100)
+#     price = models.DecimalField(max_digits=10, decimal_places=2)
+#     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
 
-
+#     class Meta:
+#         db_table = 'CompanyOrder'
 
 class OrderInfo(models.Model):
     primary_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order_infos')
     date = models.DateField()
     order_type = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
-    # quantity = models.PositiveIntegerField()
-    # unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-    weight = models.DecimalField(max_digits=10, decimal_places=2,default=0.0)  
-    length = models.DecimalField(max_digits=10, decimal_places=2, default=0.0,null=True) 
-    width = models.DecimalField(max_digits=10, decimal_places=2,default=0.0,null=True)   
-    height = models.DecimalField(max_digits=10, decimal_places=2, default=0.0,null=True)  
+    weight = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)  
+    length = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, null=True) 
+    width = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, null=True)   
+    height = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, null=True)  
     payment_method = models.CharField(max_length=100)
-    total = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         db_table = 'Orderinfo'
 
 
+
+
+class Payment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3)
+    receipt = models.CharField(max_length=255)  # Assuming it's a string field to store the receipt ID
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'Payment'

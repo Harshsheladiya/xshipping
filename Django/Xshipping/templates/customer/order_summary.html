@@ -75,12 +75,18 @@
     }
 </style>
 
+{% comment %} <form method="post" action="{% url 'add_company_order' order_info.id %}"> {% endcomment %}
+
+
+    <form method="post" action="/customer/process_payment/">
+    {% csrf_token %}
 <div class="wrapper-pro">
     <div class="content-inner-all">
         <div class="basic-form-area mg-b-15">
             <div class="order-summary-container">
                 <div class="order-summary-header">
                     <h1>Order Summary</h1>
+                  
                 </div>
                 <hr class="order-summary-divider">
                 <div class="order-summary-body">
@@ -111,15 +117,14 @@
                     <div class="order-details">
                         <h3>Order Details</h3>
                                 {% if latest_order_info %}
-                                <h5>Order Details</h5>
                                 <p>Date: {{ latest_order_info.date }}</p>
                                 <p>Order Type: {{ latest_order_info.order_type }}</p>
                                 <p>Product Name: {{ latest_order_info.product_name }}</p>
                                 {% comment %} <p>Quantity: {{ latest_order_info.quantity }}</p>
                                 <p>Unit Price: ₹{{ latest_order_info.unit_price }}</p> {% endcomment %}
-                                <p>Total: ₹{{ latest_order_info.total }}</p>
+                                {% comment %} <p>Total: ₹{{ latest_order_info.total }}</p> {% endcomment %}
                                 <h5>Shipping Details</h5>
-                                <p>Weight: {{ latest_order_info.weight }} kg</p>
+                                <p id="calculated-total">Weight: {{ latest_order_info.weight }} kg</p>
                                 <p>weight ranges: {{ weight_display }}</p>
                                 <p>Length: {{ latest_order_info.length }} cm</p>
                                 <p>Width: {{ latest_order_info.width }} cm</p>
@@ -138,12 +143,12 @@
                                         {% if weight_range == weight_display and weight_range == weight_range_map %}
                                         <h4>Weight Range: {{ weight_range }}</h4>
                                         <ul>
-                                            {% for company, company_map in companies_map %}
-                                                {% if companiess %}
-                                                    {% for company in companiess %}
+                                            {% for company_range, company_list in weight_company_map.items %}
+                                                {% if company_range == weight_range %}
+                                                    {% for company_map in company_list %}
                                                         <li>
-                                                            <input type="radio" id="company_{{ company.id }}" name="selected_company" value="{{ company.id }}">
-                                                            <label for="company_{{ company.id }}">Company name: {{ company.owner_name }} - Price: {{ company_map.price }}</label>
+<input type="radio" id="company_{{ company_map.0.id }}" name="selected_company" value="{{ company_map.0.id }}">
+                <label for="company_{{ company_map.0.id }}">Company name: {{ company_map.0.owner_name }} - Price: {{ company_map.1.price }}</label>
                                                         </li>
                                                     {% endfor %}
                                                 {% endif %}
@@ -156,14 +161,55 @@
                                     {% endif %}
                                 </div>
                                 
-                            
+                                
+                                <div class="form-group-inner">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <label class="login2 pull-right pull-right-pro">Total</label >
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <input type="tel" class="form-control" name="total" maxlength="7" readonly />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="order-summary-footer">
-                                <button class="btn btn-white">Cancel</button>
-                                <button class="btn btn-primary">Proceed to Payment</button>
+                                <button class="btn btn-white" type="button">Cancel</button>
+                                <button class="btn btn-primary" type="submit" id="submitOrderBtn">Proceed to Payment</button>
                             </div>
+        
                         </div>
                     </div>
                 </div>
             </div>
+          
+            
+
+            <script>
+                // Listen for changes in selected company radio buttons
+                document.querySelectorAll('input[name="selected_company"]').forEach(function(radio) {
+                    radio.addEventListener('change', function() {
+                        // Get the selected company's price
+                        var price = parseFloat(this.nextElementSibling.textContent.split('Price: ')[1]);
+            
+                        // Get the weight from the Django template variable
+                        var weightString = document.getElementById('calculated-total').innerText;
+                        var weight = parseFloat(weightString.split(' ')[1]);
+            
+                        // Calculate the total
+                        var total = price * weight;
+            
+                        // Update the value of the total input field
+                        document.querySelector('input[name="total"]').value = total.toFixed(2);
+                    });
+                });
+            
+                // Function to submit the form
+                document.getElementById('submitOrderBtn').addEventListener('click', function() {
+                    // Manually trigger form submission
+                    document.getElementById('CompanyOrderForm').submit();
+                });
+            </script>
+            
             {% endblock %}
+       

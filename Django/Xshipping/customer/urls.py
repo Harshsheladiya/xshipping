@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from customer import views
 
+
 urlpatterns = [
 	path('layout',views.layout, name='layout'),
 	path('index/',views.index, name='index'),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('Orderinfo/',views.Orderinfo, name='Orderinfo'),
     path('add_order4', views.add_order4, name='add_order4'),
     path('order_summary/', views.order_summary, name='order_summary'),
+    # path('add_company_order/<int:order_info_id>/', views.add_company_order, name='add_company_order'),
     path('orderdetail', views.orderdetail, name='orderdetail'),
     # path('select_company/', views.select_company, name='select_company'),
     path('myprofile', views.myprofile, name='myprofile'),
@@ -46,8 +48,8 @@ urlpatterns = [
     path('login/',views.login, name='login'),
     path('login_check/',views.login_check, name='login_check'),
     path('logout/',views.logout, name='logout'),
-
-
+    path('process_payment/',views.process_payment, name='process_payment'),
+    path('payment_success/', views.payment_success, name='payment_success'),
 
     # path('payment', views.payment, name='payment'),
     # path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
