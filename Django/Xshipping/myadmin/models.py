@@ -7,6 +7,7 @@ class company_reg(models.Model):
 	filename = models.CharField(max_length=255)
 	contact=models.BigIntegerField()
 	address=models.TextField()
+	
 
 	class Meta:
 		db_table='companies'

@@ -12,9 +12,9 @@
         "key": "{{ razorpay_key_id }}", // Your Razorpay key ID
         "amount": "{{ amount }}", // The amount in paisa
         "currency": "INR",
-        "name": "Your Company Name",
+        "name": "{{ selected_company_name }}",
         "description": "Payment for Order",
-        "image": "{% static 'path/to/your/logo.png' %}", // URL of your company logo
+        "image":"{% static 'customer/images/logo.jpg'%}", // URL of your company logo
         "order_id": "{{ order_id }}", // The Razorpay order ID
         "handler": function(response){
             console.log(response);

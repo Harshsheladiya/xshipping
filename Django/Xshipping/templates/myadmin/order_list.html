@@ -12,10 +12,6 @@
                     <thead>
                         <tr>
                             <th data-field="orderid">Order ID</th>
-                            <th data-field="sendername">Sender Name</th>
-                            <th data-field="senderemail">Sender Email</th>
-                            <th data-field="receivername">Receiver Name</th>
-                            <th data-field="receiveremail">Receiver Email</th>
                             <th data-field="orderdate">Order Date</th>
                             <th data-field="ordertype">Order Type</th>
                             <th data-field="productname">Product Name</th>
@@ -28,14 +24,9 @@
                     </thead>
                     <tbody>
                         {% for order in orders %}
-                            {% for sender in sender_orders %}
-                            {% for receiver in receiver_orders %}
+                          
                                 <tr class="new-email">
                                     <td>{{ order.id }}</td>
-                                    <td>{{ sender.Sender_name }}</td>
-                                    <td>{{ sender.Sender_email }}</td>
-                                    <td>{{ receiver.Receiver_name }}</td>
-                                    <td>{{ receiver.Receiver_email }}</td>
                                     <td>{{ order.date }}</td>
                                     <td>{{ order.order_type }}</td>
                                     <td>{{ order.product_name }}</td>
@@ -45,8 +36,6 @@
                                     <td>{{ order.height }}</td>
                                     <td>{{ order.payment_method }}</td>
                                 </tr>
-                            {% endfor %}
-                            {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>

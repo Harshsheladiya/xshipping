@@ -135,44 +135,32 @@ from django.contrib import messages
 from .models import profile  # Assuming you have a Profile model defined
 
 def store(request):
-    if request.method == 'POST':
-        user_name = request.POST.get('username')
-        fname = request.POST.get('fname')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        cpassword = request.POST.get('cpassword')
-        contact = request.POST.get('contact')
-        gender = request.POST.get('gender')
-        address = request.POST.get('address')
-        pincode = request.POST.get('pincode')
-        state = request.POST.get('state')
-        city = request.POST.get('city')
+	#auth user
+	user_name   = request.POST['username']
+	fname 		= request.POST['fname']
+	email 		= request.POST['email']
+	password 	= request.POST['password']
+	cpassword 	= request.POST['cpassword']
+	contact 	= request.POST['contact']
+	gender 		= request.POST['gender']
+	address 	= request.POST['address']
+	pincode 	= request.POST['pincode']
+	state 		= request.POST['state']
+	city 		= request.POST['city']
+	
+	
 
-        if not (user_name and fname and email and password and cpassword and contact and gender and address and pincode and state and city):
-            # Handle case where required fields are missing
-            messages.error(request, 'All fields are required.')
-            return redirect('/customer/registration/')
-        
-        if password == cpassword:
-            # Create user
-            user = User.objects.create_user(username=user_name, first_name=fname, email=email, password=password)
-            # Set additional user attributes
-            user.first_name = fname
-            user.phone = contact
-            user.save()
 
-            # Create profile
-            profile = Profile.objects.create(contact=contact, gender=gender, address=address, pincode=pincode, state=state, city=city, user_id=user.id)
+	if password==cpassword:
+		user = User.objects.create_user(username=user_name,first_name=fname,email=email,password=password)
 
-            # Redirect to login page
-            return redirect('/customer/login/')
-        else:
-            messages.error(request, 'Password and confirm password do not match.')
-            return redirect('/customer/registration/')
-    else:
-        # Handle case where request method is not POST
-        messages.error(request, 'Invalid request method.')
-        return redirect('/customer/registration/')
+		profile.objects.create(contact=contact,gender=gender,address=address,pincode=pincode,state=state,city=city,user_id=user.id)
+		return redirect('/customer/login/')
+	else:
+		messages.error(request,'password and confirm password is mismatched')
+		return redirect('/customer/registration/')
+
+		
 
 
 		
@@ -314,48 +302,38 @@ from django.shortcuts import get_object_or_404
 from .models import SenderOrder, ReceiverOrder, OrderInfo
 from django.db.models import Q
 
-@login_required
 def order_summary(request):
-    # Retrieve distinct sender and receiver information
     sender_order = SenderOrder.objects.filter(primary_user=request.user).order_by('-id').first()
     receiver_order = ReceiverOrder.objects.filter(primary_user=request.user).order_by('-id').first()
 
-    # Check if sender_order and receiver_order are None
     if sender_order is None or receiver_order is None:
-        # Handle the case where sender_order or receiver_order is not found
         return render(request, 'error_template.html', {'error_message': 'Sender order or receiver order not found'})
 
-    sender_city = sender_order.Sender_city 
-    receiver_city = receiver_order.Receiver_city 
+    sender_city = sender_order.Sender_city
+    receiver_city = receiver_order.Receiver_city
 
-    # Retrieve distinct package weights from the price_reg model
     package_weights_decimal = price_reg.objects.values_list('package_weight', flat=True).distinct()
-    # Convert Decimal objects to string for display
     package_weights = [str(weight) for weight in package_weights_decimal]
 
-    # Retrieve the latest OrderInfo for the user
     latest_order_info = OrderInfo.objects.filter(primary_user=request.user).order_by('-id').first()
 
-    # Mapping predefined weights to their corresponding ranges
     weight_ranges = {
         '0-20': '5-20kg',
         '21-50': '21-50kg',
         '51-100': '51-100kg',
     }
 
-    # Get the weight range based on the weight
     weight_display = None
     if latest_order_info is not None:
-        weight = Decimal(str(latest_order_info.weight))  # Convert Decimal to string
+        weight = Decimal(str(latest_order_info.weight))
         for range_key, range_value in weight_ranges.items():
             start, end = map(int, range_key.split('-'))
             if start <= weight <= end:
                 weight_display = range_value
                 break
         if weight_display is None:
-            weight_display = str(weight) + 'kg'  # If weight is not within predefined ranges, display the original weight
+            weight_display = str(weight) + 'kg'
 
-    # Retrieve company information based on weight ranges
     weight_company_map = {}
     weight_company_mapp = {}
 
@@ -363,22 +341,23 @@ def order_summary(request):
         companiess = company_reg.objects.filter(price_reg__from_city=sender_city, price_reg__to_city=receiver_city, price_reg__package_weight=weight_range).distinct()
         weight_company_mapp[weight_range] = companiess
 
-    # Ensure that companies_map and companiess are of the same length
     for weight_range, companies in weight_company_mapp.items():
         companies_map = price_reg.objects.filter(from_city=sender_city, to_city=receiver_city, package_weight=weight_range).distinct()
         zipped_data = zip_longest(companies, companies_map)
         weight_company_map[weight_range] = zipped_data
-
+        fname = request.user.first_name 
     context = {
         'sender_order': sender_order,
         'receiver_order': receiver_order,
-        'sender_city': sender_city,  # Add sender_city to context
-        'receiver_city': receiver_city,  # Add receiver_city to context
+        'sender_city': sender_city,
+        'receiver_city': receiver_city,
         'latest_order_info': latest_order_info,
         'package_weights': package_weights,
         'weight_display': weight_display,
         'weight_company_map': weight_company_map,
         'weight_company_mapp': weight_company_mapp,
+        'fname': fname,
+        
     }
 
     return render(request, 'customer/order_summary.html', context)
@@ -406,33 +385,74 @@ def orderdetail(request):
 import razorpay
 from django.conf import settings
 from django.http import JsonResponse
-import time 
+import time
 from razorpay import Client
+# from twilio.rest import Client as TwilioClient  # Rename to avoid conflict with Razorpay Client
+from django.shortcuts import render
 
 def process_payment(request):
     if request.method == 'POST':
-        total_amount = request.POST.get('total')
-        total_amount_in_paisa = int(float(total_amount)*100 )
-        
-        client = Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-        payment_data = {
-            'amount': total_amount_in_paisa,
-            'currency': 'INR',
-            'receipt': 'order_receipt_' + str(int(time.time())),  # Unique order receipt
-        }
-        payment = client.order.create(data=payment_data)
-        
-        context = {
-            'razorpay_key_id': settings.RAZORPAY_KEY_ID,
-            'amount': total_amount_in_paisa,
-            'order_id': payment['id'],
-            'user_name': request.user.first_name,  # Replace with your user's name field
-            'user_email': request.user.email,  # Replace with your user's email field
-            # 'user_phone': request.user.Contact,  # Replace with your user's phone field
-            # 'user_address': request.user.address,  # Replace with your user's address field
-        }
-        return render(request, 'customer/payment.html', context)
+        try:
+            total_amount = request.POST.get('total')
+            total_amount_in_paisa = int(float(total_amount) * 100)
+
+            client = Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+            payment_data = {
+                'amount': total_amount_in_paisa,
+                'currency': 'INR',
+                'receipt': 'order_receipt_' + str(int(time.time())),  # Unique order receipt
+            }
+            payment = client.order.create(data=payment_data)
+
+            context = {
+                'razorpay_key_id': settings.RAZORPAY_KEY_ID,
+                'amount': total_amount_in_paisa,
+                'order_id': payment['id'],
+                'user_name': request.user.first_name,  # Replace with your user's name field
+                'user_email': request.user.email,  # Replace with your user's email field
+                'user_phone': request.user.profile.contact,  # Update to access contact field from the profile
+                'user_address': request.user.profile.address,  # Replace with your user's address field
+            }
+            return render(request, 'customer/payment.html', context)
+        except Exception as e:
+            # Handle any errors that occur during payment processing
+            return JsonResponse({'success': False, 'message': str(e)})
+
+def send_sms(to, body):
+    try:
+        client = TwilioClient(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+        message = client.messages.create(
+            body=body,
+            from_=settings.TWILIO_PHONE_NUMBER,
+            to=to
+        )
+        # Log the SID of the sent message for reference
+        print("Message SID:", message.sid)
+        return message.sid
+    except Exception as e:
+        # Handle any errors that occur during SMS sending
+        print("Error sending SMS:", e)
+        return None
 
 
 def payment_success(request):
-    return render(request, 'customer/payment_success.html')
+    try:
+        # Your payment success logic here
+        # Example: sending an SMS
+        total_amount = request.POST.get('total')
+        payment_id = request.POST.get('payment_id')
+        user_phone_number = request.user.profile.contact  # Assuming this is how you get the user's phone number
+        message_body = f"Payment successful! Amount: {total_amount} Payment ID: {payment_id}"
+        send_sms(user_phone_number, message_body)
+        return render(request, 'customer/payment_success.html')
+    except Exception as e:
+        # Handle any errors that occur during SMS sending
+        return JsonResponse({'success': False, 'message': str(e)})
+ 
+
+
+def viewfeedback(request):
+    readf= feedback.objects.all()
+    context={'readf': readf}
+    return render(request, 'customer/viewfeedback.html', context)

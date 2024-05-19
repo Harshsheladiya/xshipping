@@ -41,6 +41,19 @@
         .payment-success-button:hover {
             background-color: #4cae4c;
         }
+
+        /* Style for success and error messages */
+        .message {
+            margin-top: 20px;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .error-message {
+            color: red;
+        }
     </style>
 
     <!-- Popup for payment success message -->
@@ -52,6 +65,8 @@
             </div>
             <button class="payment-success-button" onclick="window.location.href = '{% url 'index' %}'">OK</button>
             <button class="payment-success-button" onclick="printPaymentReceipt()">Print</button>
+            <!-- Message container -->
+            <div id="messageContainer" class="message"></div>
         </div>
     </div>
 
@@ -59,6 +74,15 @@
         // Function to open the payment success popup
         function openPaymentSuccessPopup() {
             document.getElementById("paymentSuccessPopup").style.display = "block";
+            // Check if the SMS was sent successfully
+            var successMessage = "{{ success_message }}";
+            var errorMessage = "{{ error_message }}";
+            var messageContainer = document.getElementById("messageContainer");
+            if (successMessage) {
+                messageContainer.innerHTML = '<p class="success-message">' + successMessage + '</p>';
+            } else if (errorMessage) {
+                messageContainer.innerHTML = '<p class="error-message">' + errorMessage + '</p>';
+            }
         }
 
         // Function to close the payment success popup
